@@ -175,7 +175,7 @@
 
 .request-box {
   background-color: white;
-  position: absolute;
+  position: relative;
   padding: 30px;
   width: 320px;
   border-radius: 12px;
@@ -184,6 +184,7 @@
   flex-direction: column;
   gap: 15px;
   text-align: center;
+  color: black;
 }
 
 .input-field
@@ -212,4 +213,64 @@
 
 .reuqst-box-text{
   color: #000;
+}
+
+.old-box {
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  background: #e8e8e8;
+  border: 1px solid #b3b3b3;
+}
+
+.old-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.old-table th,
+.old-table td {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: left;
+  background: #f9f9f9;
+}
+
+.old-table th {
+  background: #dcdcdc;
+}
+
+.view-btn {
+  padding: 4px 8px;
+  background: #dcdcdc;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #c9c9c9;
+}
+
+
+.request-box .old-box {
+  background: #f7f7f7;
+  border: 1px solid #c7c7c7;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.approve-btn, .reject-btn {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.approve-btn {
+  background: #c0ffc0;
+}
+
+.reject-btn {
+  background: #ffc0c0;
 }

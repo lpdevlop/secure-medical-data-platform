@@ -50,7 +50,7 @@ return (
 
     <div className='login-panel'>    
     <div className='left-panel'>
-    <h1 className="system-title">Secure Portal to Store Patient Medical Records</h1>
+    <h1 className="system-title">Secure Patient Records Portal</h1>
           <p className="system-description">
             A secure platform for managing patient records,
             medical history, and health analytics.
@@ -64,14 +64,14 @@ return (
     <div className="right-panel">
         
         <div className="Header">
-            <div className="text front-s ">Login</div>
+            <div className="text front-s " style={{ color: 'black' }}>Sign In</div>
         </div>
         
-        <div className='userinput-box'>
-        <input name="username" />
-        <input name="password" type="password" />
-        </div>
-
+ 
+<div className='userinput-box'>
+    <input name="username" placeholder="Username" />
+    <input name="password" type="password" placeholder="Password" />
+</div>
         <div className='login-button'>
         <button>Login</button>
         </div>

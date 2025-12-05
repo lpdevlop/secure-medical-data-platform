@@ -1,0 +1,36 @@
+.old-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin-top: 15px;
+}
+
+.old-table th,
+.old-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+}
+
+.old-table th {
+  background: #dcdcdc;
+}
+
+.view-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-btn:hover {
+  background: #217dbb;
+}
+
+.view-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

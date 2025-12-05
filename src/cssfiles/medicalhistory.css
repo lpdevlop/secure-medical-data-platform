@@ -1,0 +1,30 @@
+.history-box {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  min-width: 600px;
+  color: black;
+  margin: 0 auto;
+}
+
+.history-box h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.history-table th {
+  background-color: #dcdcdc;
+}
