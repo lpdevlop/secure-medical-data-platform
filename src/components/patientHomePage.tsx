@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const PatientHomePage = () => {
 
-  // Sample dummy requests (replace with API later)
   const [requests, setRequests] = useState([
     { id: 1, doctor: "Dr. John Smith", reason: "Needs to review your medical history", status: "Pending" },
     { id: 2, doctor: "Dr. Emily Brown", reason: "Follow-up appointment data access", status: "Pending" }
@@ -19,7 +18,6 @@ const PatientHomePage = () => {
 
   return (
     <>
-      {/* Sidebar */}
       <div className="simple-sidebar">
         <h3 className="title">HealthCare Portal</h3>
 
@@ -31,7 +29,6 @@ const PatientHomePage = () => {
         </ul>
       </div>
 
-      {/* Main Window */}
       <div className="request-window">
 
         <div className="request-box" style={{ width: "450px" }}>

@@ -4,9 +4,9 @@ import "../../cssfiles/medicalhistory.css";
 const PatientHistory = () => {
   // Sample patient history data
   const historyData = [
-    { date: "2025-11-01", patientId: "P101", time: "10:30 AM", status: true },
-    { date: "2025-10-15", patientId: "P102", time: "02:15 PM", status: false },
-    { date: "2025-09-20", patientId: "P103", time: "11:00 AM", status: true },
+    { date: "2025-11-01", patientId: "P0000001", time: "10:30 ", status: true },
+    { date: "2025-10-15", patientId: "P0000002", time: "02:15 ", status: false },
+    { date: "2025-09-20", patientId: "P0000003", time: "11:00 ", status: true },
   ];
 
   return (
@@ -17,9 +17,9 @@ const PatientHistory = () => {
           <tr>
             <th>Date</th>
             <th>Patient ID</th>
-            <th>Time</th>
+            <th>Expired Time</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Actisson</th>
           </tr>
         </thead>
         <tbody>

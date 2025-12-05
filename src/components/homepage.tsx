@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import MedicalRequests from "./MedicalRequests";
+import MedicalRequests from "./subcomponents/MedicalRequests";
 import HomeBody from "./subcomponents/accessRequest"; 
 import PatientHistory from "./subcomponents/patientHistory"
 import  PatientProfiles  from "./subcomponents/patientProfiles";

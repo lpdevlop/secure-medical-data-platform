@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "../cssfiles/MedicalRequests.css"
+import "../../cssfiles/MedicalRequests.css"
 const MedicalRequests = () => {
   // Sample data, replace with API call later
   const [requests, setRequests] = useState([
-    { id: 1, patient: "John Doe", record: "Blood Test", status: "Pending" ,time:"33.33"},
-    { id: 2, patient: "Mary Smith", record: "X-Ray Chest", status: "Approved",time:"43.33" },
-    { id: 3, patient: "Kevin Brown", record: "Prescription History", status: "Denied",time:"65.33" },
+    { id: 1, patient: "PA0000001", record: "Blood Test", status: "Pending" ,time:"33.33"},
+    { id: 2, patient: "PA0000002", record: "X-Ray Chest", status: "Approved",time:"43.33" },
+    { id: 3, patient: "PA0000003", record: "Prescription History", status: "Denied",time:"65.33" },
   ]);
 
   // Handler to simulate Access click
@@ -28,7 +28,7 @@ const MedicalRequests = () => {
               <th>Patient Id</th>
               <th>Record</th>
               <th>Status</th>
-              <th>Time</th>
+              <th>Expired Time</th>
               <th>Action</th>
             </tr>
           </thead>

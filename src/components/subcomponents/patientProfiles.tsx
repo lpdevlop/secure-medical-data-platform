@@ -3,9 +3,9 @@ import "../../cssfiles/patientprofile.css";
 
 const PatientProfiles = () => {
   const userData = [
-    { id: "U101", name: "Dr. Smith", role: "Doctor", email: "smith@hospital.com", status: true },
-    { id: "U102", name: "Dr. Lee", role: "Doctor", email: "lee@hospital.com", status: false },
-    { id: "U103", name: "Alice Johnson", role: "Patient", email: "alice@gmail.com", status: true },
+    { id: "U101", name: "Kasun Gmage", time: "33.32", email: "smith@hospital.com", status: true },
+    { id: "U102", name: "Sam Lee", time: "31.21", email: "lee@hospital.com", status: false },
+    { id: "U103", name: "Alice Johnson", time: "11.22", email: "alice@gmail.com", status: true },
   ];
 
   return (
@@ -14,9 +14,9 @@ const PatientProfiles = () => {
       <table className="old-table">
         <thead>
           <tr>
-            <th>User ID</th>
+            <th>Patient ID</th>
             <th>Name</th>
-            <th>Role</th>
+            <th>Expired Time</th>
             <th>Email</th>
             <th>Status</th>
             <th>Action</th>
@@ -27,7 +27,7 @@ const PatientProfiles = () => {
             <tr key={index}>
               <td>{user.id}</td>
               <td>{user.name}</td>
-              <td>{user.role}</td>
+              <td>{user.time}</td>
               <td>{user.email}</td>
               <td>{user.status ? "Active" : "Inactive"}</td>
               <td>
