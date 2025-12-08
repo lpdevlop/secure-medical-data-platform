@@ -35,3 +35,16 @@ export interface AccessRequestResponse{
   recordType: string;
 
 }
+
+
+
+export interface MedicalHistoryRecord {
+  medicalId: string;
+  patientId: string;
+  createdAt: string;       
+  accessExpires: string;    
+  status: boolean;          
+}
+export interface PatientHistoryProps {
+  doctorId: string; 
+}

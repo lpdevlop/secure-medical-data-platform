@@ -1,5 +1,5 @@
 import { data } from 'react-router-dom';
-import type { AccessRequestPayload, AccessRequestResponse, LoginRequest, TokenResponse, UserProfile, UserProfilePayload } from './apiTypes';
+import type { AccessRequestPayload, AccessRequestResponse, LoginRequest, MedicalHistoryRecord, PatientHistoryProps, TokenResponse, UserProfile, UserProfilePayload } from './apiTypes';
 import axiosInstance from './axiosInstance';
 import type { CustomAxiosRequestConfig } from './axiosInstance';
 
@@ -12,6 +12,9 @@ const apiservice ={
 
     requestAccess: (data: AccessRequestPayload) =>
     axiosInstance.post<boolean>("/api/access/request", data),
+
+  requestHistory: (doctorId: string) =>
+    axiosInstance.get<MedicalHistoryRecord[]>(`/api/medical/history/${doctorId}`),
 
 }
 

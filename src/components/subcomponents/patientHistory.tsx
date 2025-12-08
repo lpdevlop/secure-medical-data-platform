@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../cssfiles/medicalhistory.css";
+import apiservice from "../../apis/apiservice";
+import { jwtDecode } from "jwt-decode";
 
+interface MedicalHistoryRecord {
+  medicalId: string;
+  patientId: string;
+  createdAt: string;       
+  accessExpires: string;    
+  status: boolean;          
+}
+
+interface JwtPayload {
+  sub: string; 
+  role?: string;
+  exp: number;
+}
+interface PatientHistoryProps {
+  doctorId: string; 
+}
 const PatientHistory = () => {
-  // Sample patient history data
-  const historyData = [
-    { date: "2025-11-01", patientId: "P0000001", time: "10:30 ", status: true },
-    { date: "2025-10-15", patientId: "P0000002", time: "02:15 ", status: false },
-    { date: "2025-09-20", patientId: "P0000003", time: "11:00 ", status: true },
-  ];
+
+  const [historyData, setHistoryData] = useState<MedicalHistoryRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMedicalHistory = async () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) return;
+
+      try {
+        const decoded: JwtPayload = jwtDecode(token);
+        const doctorId = decoded.sub;
+
+        const response = await apiservice.requestHistory(doctorId); 
+
+        setHistoryData(response.data);
+      } catch (err) {
+        console.error("Failed to fetch medical history:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedicalHistory();
+  }, []);
 
   return (
     <div className="request-box history-box">
@@ -19,15 +56,15 @@ const PatientHistory = () => {
             <th>Patient ID</th>
             <th>Expired Time</th>
             <th>Status</th>
-            <th>Actisson</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {historyData.map((record, index) => (
             <tr key={index}>
-              <td>{record.date}</td>
+              <td>{record.createdAt}</td>
               <td>{record.patientId}</td>
-              <td>{record.time}</td>
+              <td>{record.createdAt}</td>
               <td>{record.status ? "Granted" : "Pending"}</td>
               <td>
                 <button
