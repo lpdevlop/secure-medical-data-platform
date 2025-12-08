@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig, type InternalAxiosRequestConfig } from "axios";
-const API_BASE_URL=import.meta.env.VITE_BASE_URL;
+const API_BASE_URL=import.meta.env.VITE_API_BASE_URL;
 
 export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
     skipAuth?: boolean;
@@ -15,7 +15,7 @@ const axiosInstance=axios.create({
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig & CustomAxiosRequestConfig) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('accessToken');
     if (token && !config.skipAuth) {
       config.headers.set('Authorization', `Bearer ${token}`);
     }

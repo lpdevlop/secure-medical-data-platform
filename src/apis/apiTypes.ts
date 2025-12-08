@@ -1,12 +1,16 @@
 
 
 export interface LoginRequest {
-  email: string;
+  nic: string;
   password: string;
 }
 
 export interface TokenResponse {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
+  role?: string;
+  fullName?: string;
+
 }
 
 export interface UserProfile {
@@ -17,4 +21,17 @@ export interface UserProfile {
 
 export interface UserProfilePayload {
   id: string;
+}
+
+export interface AccessRequestPayload{
+      patientSecureId:string;
+      reason:string;
+      doctorId:string;
+
+}
+
+export interface AccessRequestResponse{
+  patientId: string;
+  recordType: string;
+
 }

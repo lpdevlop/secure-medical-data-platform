@@ -51,7 +51,7 @@ const HomePage = () => {
       </div>
 
       <div className="request-window">
-        {activeComponent === "home" && <HomeBody />}
+        {activeComponent === "home" && <HomeBody key="home" />}
         {activeComponent === "medical" && <MedicalRequests />}
         {activeComponent === "medicalhistory" && <PatientHistory />}
         {activeComponent === "patientProfiles" && <PatientProfiles />}
