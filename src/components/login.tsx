@@ -1,53 +1,49 @@
 import { useState } from 'react';
-import '../App.css'
+import '../App.css';
 import apiService from "../apis/apiservice";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 interface DecodedToken {
-  uuid: string;
   sub?: string;
   role?: string;
 }
 
-interface UserProfilePayload {
-  id: string;
-}
-
-const LoginSignup = () =>{
+const LoginSignup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [profile, setUser] = useState('');
-  const navigate=useNavigate();
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-
       const response = await apiService.login({
         nic: email,
         password: password
       });
-                console.log("dddddddd",response.data)
 
-     const { accessToken, refreshToken, role, fullName } = response.data;
+      const { accessToken, refreshToken } = response.data;
 
+      // Save tokens in localStorage
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
 
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-
+      // Decode JWT
       const decoded: DecodedToken = jwtDecode(accessToken);
 
-      localStorage.setItem("userId", decoded.sub ?? "");
-      if (decoded.role) {
-        localStorage.setItem("role", decoded.role);
-      }
+      if (decoded.sub) localStorage.setItem("userId", decoded.sub);
+      if (decoded.role) localStorage.setItem("role", decoded.role);
 
-      navigate("/homepage");
+      // Redirect based on role
+      if (decoded.role === "DOCTOR") {
+        navigate("/homepage"); // Doctor dashboard
+      } else if (decoded.role === "PATIENT") {
+        navigate("/patienthomepage"); // Patient dashboard
+      } else {
+        setError("Unknown role. Cannot redirect.");
+      }
 
     } catch (err) {
       console.error("Login error: ", err);
@@ -55,35 +51,25 @@ const LoginSignup = () =>{
     }
   };
 
-
-return (
- <div className="items-center">
-
+  return (
+    <div className="items-center">
       <div className="login-panel">
-
         <div className="left-panel">
           <h1 className="system-title">Secure Patient Records Portal</h1>
           <p className="system-description">
             A secure platform for managing patient records and medical history
           </p>
-
           <div className="signup-button">
-            <button onClick={() => navigate('/signup')}>
-              SignUp
-            </button>
+            <button onClick={() => navigate('/signup')}>SignUp</button>
           </div>
         </div>
 
         <div className="right-panel">
-
           <div className="Header">
-            <div className="text front-s" style={{ color: 'black' }}>
-              Sign In
-            </div>
+            <div className="text front-s" style={{ color: 'black' }}>Sign In</div>
           </div>
 
           <form onSubmit={handleLogin}>
-
             <div className="userinput-box">
               <input
                 name="email"
@@ -91,7 +77,6 @@ return (
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-
               <input
                 name="password"
                 type="password"
@@ -106,18 +91,11 @@ return (
             <div className="login-button">
               <button type="submit">Login</button>
             </div>
-
           </form>
-
         </div>
       </div>
-
     </div>
-        
-      
-)
-}
+  );
+};
 
 export default LoginSignup;
-
-
