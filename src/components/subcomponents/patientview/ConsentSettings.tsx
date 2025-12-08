@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../cssfiles/ConsentSettings.css";
+import "../../../cssfiles/ConsentSettings.css";
 
 const ConsentSettings = () => {
   const [consents, setConsents] = useState([

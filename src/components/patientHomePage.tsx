@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PatientHomeBody from "./subcomponents/PatientHomeBody"; 
-import MyRecords from "./subcomponents/MyRecords";
+import MyRecords from "./subcomponents/patientview/MyRecords";
 import PatientHistory from "./subcomponents/PatientHistoryPatientView";
-import ConsentSettings from "./subcomponents/ConsentSettings";
+import ConsentSettings from "./subcomponents/patientview/ConsentSettings";
 
 const PatientHomePage = () => {
   const [activeComponent, setActiveComponent] = useState("home");

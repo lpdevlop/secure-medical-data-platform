@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../cssfiles/MyRecords.css"; 
+import "../../../cssfiles/MyRecords.css"; 
 
 const MyRecords = () => {
   const [records] = useState([

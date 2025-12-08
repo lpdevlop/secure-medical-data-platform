@@ -1,21 +1,53 @@
-import { useState } from "react";
-import "../../cssfiles/MedicalRequests.css"
-const MedicalRequests = () => {
-  // Sample data, replace with API call later
-  const [requests, setRequests] = useState([
-    { id: 1, patient: "PA0000001", record: "Blood Test", status: "Pending" ,time:"33.33"},
-    { id: 2, patient: "PA0000002", record: "X-Ray Chest", status: "Approved",time:"43.33" },
-    { id: 3, patient: "PA0000003", record: "Prescription History", status: "Denied",time:"65.33" },
-  ]);
+import { useEffect, useState } from "react";
+import "../../cssfiles/MedicalRequests.css";
+import { jwtDecode } from "jwt-decode";
+import apiservice from "../../apis/apiservice";
 
-  // Handler to simulate Access click
-  const handleAccess = (request: { id?: number; patient: any; record: any; status: any; }) => {
-    if (request.status === "Approved") {
-      alert(`Accessing ${request.record} for ${request.patient}`);
-    } else {
-      alert(`Access denied. Request status: ${request.status}`);
-    }
+interface JwtPayload {
+  sub: string;
+  role?: string;
+  exp: number;
+}
+
+interface PatientRecord {
+  medicalId: string;
+  patientId: string;
+  createdAt: string;
+  accessExpires: string;
+  status: boolean;
+}
+
+const MedicalRequests = () => {
+  const [records, setRecords] = useState<PatientRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        if (!token) return;
+
+        const decoded: JwtPayload = jwtDecode(token);
+        const patientId = decoded.sub;
+
+        const response = await apiservice.requestRecord(patientId);
+        setRecords(response.data);
+      } catch (err) {
+        console.error("Failed loading records:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecords();
+  }, []);
+
+  const handleAccess = (medicalId: string) => {
+    console.log("Accessing record:", medicalId);
+    // TODO: navigate or call an API
   };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="main-body">
@@ -25,25 +57,24 @@ const MedicalRequests = () => {
         <table className="old-table">
           <thead>
             <tr>
-              <th>Patient Id</th>
-              <th>Record</th>
+              <th>Medical ID</th>
+              <th>Patient ID</th>
               <th>Status</th>
               <th>Expired Time</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {requests.map((req) => (
-              <tr key={req.id}>
-                <td>{req.patient}</td>
-                <td>{req.record}</td>
-                <td>{req.status}</td>
-                <td>{req.time}</td>
+            {records.map((req) => (
+              <tr key={req.medicalId}>
+                <td>{req.medicalId}</td>
+                <td>{req.patientId}</td>
+                <td>{req.status ? "Granted" : "Pending"}</td>
+                <td>{req.accessExpires}</td>
                 <td>
                   <button
                     className="view-btn"
-                    onClick={() => handleAccess(req)}
-                    disabled={req.status !== "Approved"}
+                    onClick={() => handleAccess(req.medicalId)}
                   >
                     Access
                   </button>
@@ -52,6 +83,7 @@ const MedicalRequests = () => {
             ))}
           </tbody>
         </table>
+
       </div>
     </div>
   );

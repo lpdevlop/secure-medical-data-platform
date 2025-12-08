@@ -48,3 +48,22 @@ export interface MedicalHistoryRecord {
 export interface PatientHistoryProps {
   doctorId: string; 
 }
+
+export interface PatientRecord{
+    medicalId: string;
+  patientId: string;
+  createdAt: string;       
+  accessExpires: string;    
+  status: boolean; 
+}
+
+export interface PatientProfile {
+  patientSecureId: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  address: string;
+
+  accessGranted: boolean;
+  accessExpiresAt: string;
+}

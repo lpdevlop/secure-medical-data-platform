@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MedicalRequests from "./subcomponents/MedicalRequests";
 import HomeBody from "./subcomponents/accessRequest"; 
 import PatientHistory from "./subcomponents/patientHistory"
-import  PatientProfiles  from "./subcomponents/patientProfiles";
+import  PatientProfiles  from "./subcomponents/patientview/patientProfiles";
 const HomePage = () => {
   const [activeComponent, setActiveComponent] = useState("home"); 
 

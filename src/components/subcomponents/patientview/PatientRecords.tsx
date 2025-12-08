@@ -1,28 +1,49 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import apiservice from "../../../apis/apiservice";
+
+interface JwtPayload {
+  sub: string;
+  role?: string;
+  exp: number;
+}
+
+
+interface PatientRecord{
+   medicalId: string;
+  patientId: string;
+  createdAt: string;       
+  accessExpires: string;    
+  status: boolean; 
+}
 
 const PatientRecords = () => {
 
-  const [records] = useState([
-    {
-      id: 1,
-      title: "General Checkup Report",
-      date: "2025-01-12",
-      doctor: "Dr. John Smith"
-    },
-    {
-      id: 2,
-      title: "Blood Test Results",
-      date: "2025-01-20",
-      doctor: "Dr. Emily Brown"
-    },
-    {
-      id: 3,
-      title: "X-Ray Chest",
-      date: "2025-02-10",
-      doctor: "Dr. Michael Johnson"
-    }
-  ]);
+  const PatientRecords = () => {
+  const [records, setRecords] = useState<PatientRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        if (!token) return;
+
+        const decoded: JwtPayload = jwtDecode(token);
+        const patientId = decoded.sub;
+
+        const response = await apiservice.requestRecord(patientId);
+        setRecords(response.data);
+      } catch (err) {
+        console.error("Failed loading records:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecords();
+  }, []);
 
   return (
     <>
@@ -54,10 +75,10 @@ const PatientRecords = () => {
 
             <tbody>
               {records.map(record => (
-                <tr key={record.id}>
-                  <td>{record.title}</td>
-                  <td>{record.date}</td>
-                  <td>{record.doctor}</td>
+                <tr key={record.patientId}>
+                  <td>{record.medicalId}</td>
+                  <td>{record.accessExpires}</td>
+                  <td>{record.createdAt}</td>
                   <td>
                     <button className="view-btn">View</button>
                   </td>
@@ -72,5 +93,5 @@ const PatientRecords = () => {
     </>
   );
 };
-
+}
 export default PatientRecords;
