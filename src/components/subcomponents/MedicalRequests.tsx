@@ -61,7 +61,6 @@ const MedicalRequests = () => {
             <tr>
               <th>Record Name</th>
               <th>Patient ID</th>
-              <th>Status</th>
               <th>Expired Time</th>
               <th>Action</th>
             </tr>
@@ -71,7 +70,6 @@ const MedicalRequests = () => {
               <tr key={req.medicalId}>
                 <td>{req.name}</td>
                 <td>{req.patientId}</td>
-                <td>{req.status ? "Granted" : "Pending"}</td>
                 <td>{req.accessExpires}</td>
                 <td>
                   <button

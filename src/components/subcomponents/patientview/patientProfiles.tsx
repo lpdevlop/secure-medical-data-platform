@@ -62,7 +62,6 @@ const [profiles, setProfiles] = useState<PatientProfile[]>([]);
             <th>Patient ID</th>
             <th>Name</th>
             <th>Expired Time</th>
-            <th>Email</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -74,7 +73,6 @@ const [profiles, setProfiles] = useState<PatientProfile[]>([]);
               <td>{user.patientSecureId}</td>
               <td>{user.fullName}</td>
               <td>{user.accessExpiresAt}</td>
-              <td>{user.email}</td>
               <td>{user.accessGranted ? "Active" : "Expired"}</td>
               <td>
                 <button className="view-btn" disabled={!user.accessGranted}>

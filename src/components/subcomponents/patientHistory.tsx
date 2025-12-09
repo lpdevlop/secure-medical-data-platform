@@ -55,23 +55,20 @@ const PatientHistory = () => {
             <th>Date</th>
             <th>Patient ID</th>
             <th>Expired Time</th>
-            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {historyData.map((record, index) => (
             <tr key={index}>
-              <td>{record.createdAt}</td>
+              <td>{record.medicalId}</td>
               <td>{record.patientId}</td>
-              <td>{record.createdAt}</td>
-              <td>{record.status ? "Granted" : "Pending"}</td>
+              <td>{record.accessExpires}</td>
               <td>
                 <button
                   className="view-btn"
-                  disabled={!record.status}
                 >
-                  {record.status ? "View" : "Access"}
+                  View 
                 </button>
               </td>
             </tr>
