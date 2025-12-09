@@ -40,6 +40,12 @@ revokeConsent: (payload: { itemId:string,patientId: string; doctorId: number }) 
 getActiveConsents: () =>
   axiosInstance.get(`/api/access/active`), // make sure your backend returns data for current patient
 
+  getAuditLog: (id: number) =>
+    axiosInstance.get(`/api/audit/${id}`),
+
+  getAllAuditLogs: () =>
+    axiosInstance.get(`/api/audit/getall`)
+
 }
 
 

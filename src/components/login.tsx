@@ -40,7 +40,9 @@ const LoginSignup = () => {
       if (decoded.role === "DOCTOR") {
         navigate("/homepage"); // Doctor dashboard
       } else if (decoded.role === "PATIENT") {
-        navigate("/patienthomepage"); // Patient dashboard
+        navigate("/patienthomepage");
+      }else if(decoded.role ==="AUDITOR"){
+        navigate("/audit-logs");
       } else {
         setError("Unknown role. Cannot redirect.");
       }
