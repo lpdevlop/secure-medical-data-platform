@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import PatientHomeBody from "./subcomponents/PatientHomeBody"; 
 import MyRecords from "./subcomponents/patientview/MyRecords";
-import PatientHistory from "./subcomponents/PatientHistoryPatientView";
+import PatientHistory from "./subcomponents/patientview/PatientHistoryPatientView";
 import ConsentSettings from "./subcomponents/patientview/ConsentSettings";
 
 const PatientHomePage = () => {

@@ -43,7 +43,10 @@ export interface MedicalHistoryRecord {
   patientId: string;
   createdAt: string;       
   accessExpires: string;    
-  status: boolean;          
+  status: boolean;   
+  name: string;
+  type:string; 
+  date:string      
 }
 export interface PatientHistoryProps {
   doctorId: string; 
@@ -67,3 +70,12 @@ export interface PatientProfile {
   accessGranted: boolean;
   accessExpiresAt: string;
 }
+
+export interface MedicalRecordResponse {
+  patientId: string;
+  name: string;
+  medicalId: string;
+  type: string;
+  accessExpires: string;
+}
+

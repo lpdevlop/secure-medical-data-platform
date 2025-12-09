@@ -13,8 +13,10 @@ interface PatientRecord {
   medicalId: string;
   patientId: string;
   createdAt: string;
+    name: string;
   accessExpires: string;
   status: boolean;
+  
 }
 
 const MedicalRequests = () => {
@@ -57,7 +59,7 @@ const MedicalRequests = () => {
         <table className="old-table">
           <thead>
             <tr>
-              <th>Medical ID</th>
+              <th>Record Name</th>
               <th>Patient ID</th>
               <th>Status</th>
               <th>Expired Time</th>
@@ -67,7 +69,7 @@ const MedicalRequests = () => {
           <tbody>
             {records.map((req) => (
               <tr key={req.medicalId}>
-                <td>{req.medicalId}</td>
+                <td>{req.name}</td>
                 <td>{req.patientId}</td>
                 <td>{req.status ? "Granted" : "Pending"}</td>
                 <td>{req.accessExpires}</td>

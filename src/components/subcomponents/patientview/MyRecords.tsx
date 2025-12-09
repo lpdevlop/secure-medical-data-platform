@@ -1,31 +1,51 @@
-import React, { useState } from "react";
-import "../../../cssfiles/MyRecords.css"; 
+import React, { useEffect, useState } from "react";
+import "../../../cssfiles/MyRecords.css";
+import apiservice from "../../../apis/apiservice";
+import type { MedicalHistoryRecord, MedicalRecordResponse } from "../../../apis/apiTypes";
 
 const MyRecords = () => {
-  const [records] = useState([
-    { id: 1, doctor: "Dr. John Smith", type: "Blood Test", date: "2025-11-01" },
-    { id: 2, doctor: "Dr. Emily Brown", type: "X-Ray", date: "2025-10-15" },
-  ]);
+const [records, setRecords] = useState<MedicalHistoryRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const patientId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    if (!patientId) {
+      setError("Patient ID not found.");
+      setLoading(false);
+      return;
+    }
+
+    apiservice.requestMyRecords(patientId)
+      .then((res) => setRecords(res.data))
+      .catch(() => setError("Failed to load medical records"))
+      .finally(() => setLoading(false));
+  }, [patientId]);
+
+  if (loading) return <h3>Loading...</h3>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
     <div className="records-container">
       <h3 className="records-title">My Medical Records</h3>
+
       <table className="records-table">
         <thead>
           <tr>
-            <th>Record ID</th>
-            <th>Doctor</th>
-            <th>Type</th>
-            <th>Date</th>
+            <th>Medical ID</th>
+            <th>Patient Name</th>
+            <th>Created Time</th>
           </tr>
+    
         </thead>
+
         <tbody>
           {records.map((rec) => (
-            <tr key={rec.id}>
-              <td>{rec.id}</td>
-              <td>{rec.doctor}</td>
-              <td>{rec.type}</td>
-              <td>{rec.date}</td>
+            <tr key={rec.patientId}>
+              <td>{rec.medicalId}</td>
+              <td>{rec.name}</td>
+              <td>{new Date(rec.date).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
@@ -33,5 +53,4 @@ const MyRecords = () => {
     </div>
   );
 };
-
 export default MyRecords;
