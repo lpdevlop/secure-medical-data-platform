@@ -79,3 +79,19 @@ export interface MedicalRecordResponse {
   accessExpires: string;
 }
 
+export interface SignUpPayload{
+    fullName: string,
+    nic: string,
+    password: string,
+    role: string,
+    dateOfBirth: string,
+    gender: string,
+    contactNumber: string,
+    address: string,
+    emergencyContact: string,
+    consentGiven: boolean,
+}
+
+export interface SignUpResponse{
+
+}

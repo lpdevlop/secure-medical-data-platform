@@ -3,6 +3,7 @@ import '../App.css';
 import apiService from "../apis/apiservice";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import SignUp from './SignUp';
 
 interface DecodedToken {
   sub?: string;
@@ -14,6 +15,7 @@ const LoginSignup = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [showSignUp, setShowSignUp] = useState(false); // Toggle for signup popup
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,9 +63,10 @@ const LoginSignup = () => {
           <p className="system-description">
             A secure platform for managing patient records and medical history
           </p>
-          <div className="signup-button">
-            <button onClick={() => navigate('/signup')}>SignUp</button>
-          </div>
+         <div className="signup-button">
+  <button onClick={() => setShowSignUp(true)}>Sign Up</button>
+</div>
+
         </div>
 
         <div className="right-panel">
@@ -96,6 +99,17 @@ const LoginSignup = () => {
           </form>
         </div>
       </div>
+{showSignUp && (
+  <div className="signup-popup">
+    <div className="signup-popup-content">
+      <button className="close-btn" onClick={() => setShowSignUp(false)}>
+        &times;
+      </button>
+      <SignUp closePopup={() => setShowSignUp(false)} />
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

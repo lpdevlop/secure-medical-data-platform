@@ -5,6 +5,7 @@ import LoginPage from "./components/login";
 import HomePage from "./components/homepage";
 import PatientMedicalRecord from "./components/patientHomePage";
 import AuditLogList from './components/AuditLogList';
+import SignUp from './components/SignUp';
 
 function App() {
 
@@ -14,7 +15,8 @@ function App() {
           <Route path='/' element={<LoginPage/>}></Route>
           <Route path='/homepage' element={<HomePage/>}></Route>
           <Route path='/patienthomepage' element={<PatientMedicalRecord/>}></Route>
-          <Route path="/audit-logs" element={<AuditLogList />} />
+          <Route path="/audit-logs" element={<AuditLogList />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
       </Routes>
     </Router>    
   )

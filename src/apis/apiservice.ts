@@ -1,5 +1,5 @@
 import { data } from 'react-router-dom';
-import type { AccessRequestPayload, AccessRequestResponse, LoginRequest, MedicalHistoryRecord, PatientHistoryProps, PatientProfile, TokenResponse, UserProfile, UserProfilePayload } from './apiTypes';
+import type { AccessRequestPayload, AccessRequestResponse, LoginRequest, MedicalHistoryRecord, PatientHistoryProps, PatientProfile, SignUpPayload, SignUpResponse, TokenResponse, UserProfile, UserProfilePayload } from './apiTypes';
 import axiosInstance from './axiosInstance';
 import type { CustomAxiosRequestConfig } from './axiosInstance';
 import type { AxiosRequestConfig } from 'axios';
@@ -44,7 +44,13 @@ getActiveConsents: () =>
     axiosInstance.get(`/api/audit/${id}`),
 
   getAllAuditLogs: () =>
-    axiosInstance.get(`/api/audit/getall`)
+    axiosInstance.get(`/api/audit/getall`),
+
+  getSignUp: (data: SignUpPayload) =>
+     axiosInstance.post<boolean>(`/api/auth/signup`,data,{
+    skipAuth: true,
+  }),
+
 
 }
 
